@@ -17,7 +17,8 @@ class HomePage extends Component {
       type: 'f2l',
       img: 'F2L_01.gif',
       formula: "y' U' (R' U R)",
-      show: true,
+      lastNum: 0,
+      show: false,
     }
   }
   
@@ -40,17 +41,22 @@ class HomePage extends Component {
       if(pllLocal) {
         pll = { ...pllLocal };
       }
+      const chooseList = [ ...f2l.chooseList, ...oll.chooseList, ...pll.chooseList];
+
       this.setState({
         f2l,
         oll,
         pll,
-        chooseList: [ ...f2l.chooseList, ...oll.chooseList, ...pll.chooseList]
+        chooseList,
+        img: chooseList.length ? chooseList[0].img : 'F2L_01.gif',
+        formula: chooseList.length ? chooseList[0].formula : "y' U' (R' U R)",
+        lastNum: 0,
       })
     })
     document.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
-  onKeyDown = () => {
+  onKeyDown = (e) => {
     switch(e.keyCode) {
       case 13:
         this.randomFormula();
@@ -65,9 +71,13 @@ class HomePage extends Component {
 
   onClose = () => {
     const { f2l, oll, pll } = this.state;
+    const chooseList = [...f2l.chooseList, ...oll.chooseList, ...pll.chooseList];
     this.setState({
       visible: false,
-      chooseList: [...f2l.chooseList, ...oll.chooseList, ...pll.chooseList],
+      chooseList,
+      img: chooseList.length ? chooseList[0].img : 'F2L_01.gif',
+      formula: chooseList.length ? chooseList[0].formula : "y' U' (R' U R)",
+      lastNum: 0,
     })
   }
 
@@ -111,7 +121,6 @@ class HomePage extends Component {
       formula: chooseList[randomNum].formula,
       lastNum: randomNum,
     })
-
   }
 
   randomNum(len) {
@@ -138,65 +147,56 @@ class HomePage extends Component {
                 show: !this.state.show
               })
             }}
-          >{this.state.show ? this.state.formula : '点击此处(或空格键)显示公式'}</div>
+          >{this.state.show ? this.state.formula : '点击此处（或按空格键）显示公式'}</div>
         </div>
         <div className={styles['right']}>
           <div className={styles['open-container']}>
             <div className={styles['f2l-open']}>
-              <div>
-                <Badge showZero count={f2l.chooseList && f2l.chooseList.length}>
-                  <Button
-                    onClick={() => {
-                      this.setState({
-                        visible: true,
-                        type: 'f2l'
-                      })
-                    }}
-                    className={styles['formula-open-btn']}
-                    type="primary"
-                  >选取f2l公式</Button>
-                </Badge>
-              </div>
+              <Badge showZero count={f2l.chooseList && f2l.chooseList.length}>
+                <Button
+                  onClick={() => {
+                    this.setState({
+                      visible: true,
+                      type: 'f2l'
+                    })
+                  }}
+                  className={styles['formula-open-btn']}
+                  type="primary"
+                >选取 F2L 公式</Button>
+              </Badge>
             </div>
             <div className={styles['f2l-open']}>
-              <div>
-                <Badge showZero count={oll.chooseList && oll.chooseList.length}>
-                  <Button
-                    onClick={() => {
-                      this.setState({
-                        visible: true,
-                        type: 'oll'
-                      })
-                    }}
-                    className={styles['formula-open-btn']}
-                    type="primary"
-                  >选取oll公式</Button>
-                </Badge>
-              </div>
+              <Badge showZero count={oll.chooseList && oll.chooseList.length}>
+                <Button
+                  onClick={() => {
+                    this.setState({
+                      visible: true,
+                      type: 'oll'
+                    })
+                  }}
+                  className={styles['formula-open-btn']}
+                  type="primary"
+                >选取 OLL 公式</Button>
+              </Badge>
             </div>
             <div className={styles['f2l-open']}>
-              <div>
-                <Badge showZero count={pll.chooseList && pll.chooseList.length}>
-                  <Button
-                    onClick={() => {
-                      this.setState({
-                        visible: true,
-                        type: 'pll'
-                      })
-                    }}
-                    className={styles['formula-open-btn']}
-                    type="primary"
-                  >选取pll公式</Button>
-                </Badge>
-              </div>
+              <Badge showZero count={pll.chooseList && pll.chooseList.length}>
+                <Button
+                  onClick={() => {
+                    this.setState({
+                      visible: true,
+                      type: 'pll'
+                    })
+                  }}
+                  className={styles['formula-open-btn']}
+                  type="primary"
+                >选取 PLL 公式</Button>
+              </Badge>
             </div>
           </div>
           <div className={styles['begin-practice']}>
-            共选取<span>{chooseList.length}</span>个公式：
-            <Button
-              onClick={this.randomFormula.bind(this)}
-              type="primary"
-            >回车开始练习</Button>
+            共选取<span>{chooseList.length}</span>个公式
+            <div className={styles['use-description']}>使用说明：点击大图（或按回车键）随机切换公式</div>
           </div>
         </div>
         {visible && <ChooseFormula

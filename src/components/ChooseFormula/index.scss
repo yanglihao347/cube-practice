@@ -43,16 +43,17 @@
 }
 
 .formula-item {
-  border: 1px solid #ccc;
+  border: 2px solid #f7f7f7;
   margin-left: 20px;
   width: 50px;
   height: 50px;
   cursor: pointer;
-  margin-bottom: 10px
+  margin-bottom: 10px;
+  padding: 1px;
 }
 
 .selected {
-  border: 1px solid #1890ff;
+  border: 2px solid #1890ff;
 }
 
 .open-container {

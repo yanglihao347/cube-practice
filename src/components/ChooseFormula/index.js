@@ -217,7 +217,7 @@ class ChooseFormula extends Component {
                           className={`${styles['formula-item']} ${formulaItem.selected ? styles['selected'] : ''}`}
                           onClick={(e) => this.onItemClick(e, formulaItem)}
                         >
-                          <img src={`./images/${formulaItem.img}`} width="48" height="48" />
+                          <img src={`./images/${formulaItem.img}`} width="44" height="44" />
                         </div>)
                       }
                     })
