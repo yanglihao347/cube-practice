@@ -51,6 +51,21 @@ app.get('/test', function(req, res) {
   })
 })
 
+const request = require('request');
+app.post('/getLista', function(req, res) {
+
+  request({
+      url: 'http://abc.yanglihao.cn:3002/getList',
+      method: 'POST',
+  }, function(err, response, body) {
+      if(err) {
+          console.log(err, '=====err');
+          return;
+      }
+      res.json(body);
+  })
+})
+
 app.post('/getList', function(req, res) {
   res.header('Access-Control-Allow-Origin', '*');
   let getGroupList = new Promise((resolve, reject) => {

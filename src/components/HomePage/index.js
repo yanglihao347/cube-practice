@@ -26,17 +26,31 @@ class HomePage extends Component {
     fetch(`${getEnv()}/getList`, {
       method: 'POST',
     }).then(res => res.json()).then(data => {
-      const { f2l, oll, pll } = data;
+      let { f2l, oll, pll } = data;
+      const f2lLocal = localStorage.getItem("f2l") && JSON.parse(localStorage.getItem("f2l"));
+      const ollLocal = localStorage.getItem("oll") && JSON.parse(localStorage.getItem("oll"));
+      const pllLocal = localStorage.getItem("pll") && JSON.parse(localStorage.getItem("pll"));
+
+      if(f2lLocal) {
+        f2l = { ...f2lLocal };
+      }
+      if(ollLocal) {
+        oll = { ...ollLocal };
+      }
+      if(pllLocal) {
+        pll = { ...pllLocal };
+      }
       this.setState({
         f2l,
         oll,
         pll,
+        chooseList: [ ...f2l.chooseList, ...oll.chooseList, ...pll.chooseList]
       })
     })
     document.addEventListener('keydown', this.onKeyDown.bind(this));
   }
 
-  onKeyDown(e) {
+  onKeyDown = () => {
     switch(e.keyCode) {
       case 13:
         this.randomFormula();
@@ -49,7 +63,7 @@ class HomePage extends Component {
     }
   }
 
-  onClose() {
+  onClose = () => {
     const { f2l, oll, pll } = this.state;
     this.setState({
       visible: false,
@@ -57,23 +71,25 @@ class HomePage extends Component {
     })
   }
 
-  updateList(data, type) {
-
+  updateList = (data, type) => {
     switch(type) {
       case 'f2l':
         this.setState({
           f2l: data,
-        })
+        });
+        localStorage.setItem("f2l", JSON.stringify(data));
         break;
       case 'oll':
         this.setState({
           oll: data,
-        })
+        });
+        localStorage.setItem("oll", JSON.stringify(data));
         break;
       case 'pll':
         this.setState({
           pll: data,
         })
+        localStorage.setItem("pll", JSON.stringify(data));
         break;
       default:
         return;
@@ -186,9 +202,9 @@ class HomePage extends Component {
         {visible && <ChooseFormula
           visible={visible}
           type={type}
-          onClose={this.onClose.bind(this)}
+          onClose={this.onClose}
           data={this.state[type]}
-          updateList={this.updateList.bind(this)}
+          updateList={this.updateList}
         />}
       </div>
     )

@@ -14,7 +14,7 @@ class ChooseFormula extends Component {
 
   componentDidMount() {
     const { data } = this.props;
-    const { formulaList, chooseList } = data;
+    const { formulaList = [], chooseList = [] } = data;
     
     let allChecked = false;
 
@@ -31,7 +31,7 @@ class ChooseFormula extends Component {
 
   onAllClick(e) {
     const { updateList, data, type } = this.props;
-    const { formulaList, groupList } = data;
+    const { formulaList = [], groupList = [] } = data;
     const allChecked =  e.target.checked;
     let chooseList = [];
 
@@ -62,7 +62,7 @@ class ChooseFormula extends Component {
 
   onGroupClick(e, groupItem) {
     const { updateList, data, type } = this.props;
-    const { formulaList, groupList, chooseList } = data;
+    const { formulaList = [], groupList = [], chooseList = [] } = data;
     const groupChecked =  e.target.checked;
     let allChecked = false;
 
@@ -117,7 +117,7 @@ class ChooseFormula extends Component {
 
   onItemClick(e, formulaItem) {
     const { updateList, data, type } = this.props;
-    const { formulaList, groupList, chooseList } = data;
+    const { formulaList = [], groupList = [], chooseList = [] } = data;
     let allChecked = false;
 
     if (!formulaItem.selected) {
@@ -181,7 +181,7 @@ class ChooseFormula extends Component {
 
     const { allChecked } = this.state;
     const { visible, data, onClose } = this.props;
-    const { groupList, formulaList } = data;
+    const { groupList = [], formulaList = [] } = data;
     return (
       <Drawer
         title="选择"
