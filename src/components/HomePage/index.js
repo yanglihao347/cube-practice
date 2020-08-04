@@ -149,7 +149,7 @@ class HomePage extends Component {
 
   render() {
 
-    const { visible, type, chooseList, f2l, oll, pll } = this.state;
+    const { visible, type, chooseList, f2l, oll, pll, lastNum } = this.state;
 
     return (
       <div className={styles['container']}>
@@ -163,11 +163,11 @@ class HomePage extends Component {
               })
             }}
           >{this.state.show ? this.state.formula : '点击此处（或按空格键）显示公式'}</div>
-          <ImagesBox
-            formulas={this.state.chooseList}
-            lastNum={this.state.lastNum}
+          {chooseList.length ? <ImagesBox
+            formulas={chooseList}
+            lastNum={lastNum}
             updateFormula={this.updateFormula}
-          />
+          /> : null}
         </div>
         <div className={styles['right']}>
           <div className={styles['open-container']}>
