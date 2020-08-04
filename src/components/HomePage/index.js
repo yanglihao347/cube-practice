@@ -3,6 +3,7 @@ import styles from './index.scss';
 import { Button, Badge } from 'antd';
 import { getEnv } from '../../common/utils'
 import ChooseFormula from '../ChooseFormula';
+import ImagesBox from '../ImagesBox';
 
 class HomePage extends Component {
 
@@ -123,6 +124,20 @@ class HomePage extends Component {
     })
   }
 
+  updateFormula = (num) => {
+    const { chooseList } = this.state;
+    const len = chooseList.length;
+
+    if (len === 0) {
+      return;
+    }
+    this.setState({
+      img: chooseList[num].img,
+      formula: chooseList[num].formula,
+      lastNum: num,
+    })
+  }
+
   randomNum(len) {
     const { lastNum } = this.state;
     const randomNum = Math.floor(Math.random() * len);
@@ -139,7 +154,7 @@ class HomePage extends Component {
     return (
       <div className={styles['container']}>
         <div className={styles['left']}>
-          <img onClick={() => {this.randomFormula()}} src={`./images/${this.state.img}`} width="350px" height="350px" />
+          <img className={styles['main-img']} onClick={() => {this.randomFormula()}} src={`./images/${this.state.img}`} width="350px" height="350px" />
           <div
             className={styles['show-formula']}
             onClick={() => {
@@ -148,6 +163,11 @@ class HomePage extends Component {
               })
             }}
           >{this.state.show ? this.state.formula : '点击此处（或按空格键）显示公式'}</div>
+          <ImagesBox
+            formulas={this.state.chooseList}
+            lastNum={this.state.lastNum}
+            updateFormula={this.updateFormula}
+          />
         </div>
         <div className={styles['right']}>
           <div className={styles['open-container']}>

@@ -1,0 +1,44 @@
+.box-container {
+    width: 500px;
+    height: 70px;
+    border: 1px solid #ccc;
+    margin: 10px auto 0;
+    overflow-x: hidden;
+    padding: 5px;
+    position: relative;
+    box-shadow: 2px 2px 2px 0 #ccc;
+}
+
+.box-content {
+    display: flex;
+    height: 60px;
+    position: absolute;
+    transition: all 0.3s;
+    .img-item {
+        margin: 0 5px;
+        border: 2px solid #f7f7f7;
+        padding: 1px;
+        cursor: pointer;
+    }
+    .selected {
+        border: 2px solid #54a9f8;
+    }
+}
+
+.left-arrow, .right-arrow {
+    position: absolute;
+    height: 70px;
+    line-height: 70px;
+    top: 0;
+    width: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    z-index: 1;
+}
+.left-arrow {
+    left: 0;
+}
+.right-arrow {
+    right: 0px;
+}
