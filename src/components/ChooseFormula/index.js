@@ -71,7 +71,7 @@ class ChooseFormula extends Component {
         if (item.group === groupItem.group) {
           item.selected = 1;
           if (chooseList.every((value, index) => {
-            return value._id !== item._id; 
+            return value.id !== item.id; 
           })) {
             chooseList.push(item);
           }
@@ -88,7 +88,7 @@ class ChooseFormula extends Component {
         if (item.group === groupItem.group) {
           item.selected = 0;
           chooseList.map((value, index) => {
-            if (value._id === item._id) {
+            if (value.id === item.id) {
               chooseList.splice(index, 1)
             }
           })
@@ -123,7 +123,7 @@ class ChooseFormula extends Component {
     if (!formulaItem.selected) {
       let groupchoose = true;
       formulaList.map((item) => {
-        if (item._id === formulaItem._id) {
+        if (item.id === formulaItem.id) {
           item.selected = 1;
           chooseList.push(item);
         } else if(item.group === formulaItem.group) {
@@ -142,10 +142,10 @@ class ChooseFormula extends Component {
     } else {
       let groupchoose = true;
       formulaList.map((item) => {
-        if (item._id === formulaItem._id) {
+        if (item.id === formulaItem.id) {
           item.selected = 0;
           chooseList.map((value, index) => {
-            if (value._id === item._id) {
+            if (value.id === item.id) {
               chooseList.splice(index, 1);
             }
           })
@@ -217,7 +217,7 @@ class ChooseFormula extends Component {
                           className={`${styles['formula-item']} ${formulaItem.selected ? styles['selected'] : ''}`}
                           onClick={(e) => this.onItemClick(e, formulaItem)}
                         >
-                          <img src={`./images/${formulaItem.img}`} width="48" height="48" />
+                          <img src={formulaItem.img} width="48" height="48" />
                         </div>)
                       }
                     })

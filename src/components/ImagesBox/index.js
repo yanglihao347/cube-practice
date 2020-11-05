@@ -50,7 +50,7 @@ export default class ImagesBox extends Component {
                   updateFormula(index);
                 }}
               >
-                <img src={`./images/${item.img}`} width="54px" height="54px" />
+                <img src={item.img} width="54px" height="54px" />
               </div>)
             })
           }
