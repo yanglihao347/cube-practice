@@ -4,7 +4,6 @@ const { exec } = require('./mysql');
 var app = express();
 
 app.post('/api/getList', function(req, res) {
-  res.header('Access-Control-Allow-Origin', '*');
   let group_sql = `SELECT * FROM cube_groups`;
   let formula_sql = `SELECT * FROM cube_formulas`;
   var data = {
