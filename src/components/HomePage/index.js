@@ -16,7 +16,7 @@ class HomePage extends Component {
       oll: {},
       pll: {},
       type: 'f2l',
-      img: 'http://cube.yanglihao.cn/F2L_01.gif',
+      img: 'http://cube-cdn.yanglihao.cn/F2L_01.gif',
       formula: "y' U' (R' U R)",
       lastNum: 0,
       show: false,
@@ -48,7 +48,7 @@ class HomePage extends Component {
         oll,
         pll,
         chooseList,
-        img: chooseList.length ? chooseList[0].img : 'http://cube.yanglihao.cn/F2L_01.gif',
+        img: chooseList.length ? chooseList[0].img : 'http://cube-cdn.yanglihao.cn/F2L_01.gif',
         formula: chooseList.length ? chooseList[0].formula : "y' U' (R' U R)",
         lastNum: 0,
       })
@@ -75,7 +75,7 @@ class HomePage extends Component {
     this.setState({
       visible: false,
       chooseList,
-      img: chooseList.length ? chooseList[0].img : 'http://cube.yanglihao.cn/F2L_01.gif',
+      img: chooseList.length ? chooseList[0].img : 'http://cube-cdn.yanglihao.cn/F2L_01.gif',
       formula: chooseList.length ? chooseList[0].formula : "y' U' (R' U R)",
       lastNum: 0,
     })
