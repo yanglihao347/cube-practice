@@ -11,6 +11,7 @@ function reconnect() {
     con.connect(function(err) {
         if(err) {
             console.error(err,'db连接失败。');
+            return;
         }
         console.log('db连接成功');
     });
@@ -31,6 +32,9 @@ function reconnect() {
     con.on('error', function(err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             console.error('db error重连中。。。')
+            reconnect();
+        } else if (err.fatal) {
+            console.error('fatal error 重连中。。。')
             reconnect();
         }
     })
