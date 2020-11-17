@@ -31,10 +31,13 @@ function reconnect() {
 
     con.on('error', function(err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('db error重连中。。。')
+            console.error('db error重连中。。。');
             reconnect();
-        } else if (err.fatal) {
-            console.error('fatal error 重连中。。。')
+        } else if (err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
+            console.error('fatal error 重连中。。。');
+            reconnect();
+        } else {
+            console.error('else error 重连中。。。');
             reconnect();
         }
     })
