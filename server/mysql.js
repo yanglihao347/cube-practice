@@ -30,14 +30,15 @@ function reconnect() {
     }
 
     con.on('error', function(err) {
+        console.log('db error重连中。。。' + err + new Date().toLocaleString());
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('db error重连中。。。');
+            console.error('lost error重连中。。。' + new Date().toLocaleString());
             reconnect();
         } else if (err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
-            console.error('fatal error 重连中。。。');
+            console.error('fatal error 重连中。。。' + new Date().toLocaleString());
             reconnect();
         } else {
-            console.error('else error 重连中。。。');
+            console.error('else error 重连中。。。' + new Date().toLocaleString());
             reconnect();
         }
     })
