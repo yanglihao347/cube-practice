@@ -30,7 +30,7 @@ function reconnect() {
     }
 
     con.on('error', function(err) {
-        console.log('db error重连中。。。' + err + new Date().toLocaleString());
+        console.error(err, 'db error重连中。。。' + new Date().toLocaleString());
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             console.error('lost error重连中。。。' + new Date().toLocaleString());
             reconnect();
