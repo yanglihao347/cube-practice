@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --config=config/webpack.dev.js",
     "build": "webpack --config=config/webpack.prod.js",
     "dev": "cross-env NODE_ENV=dev nodemon ./server/app.js",
-    "server": "cross-env NODE_ENV=prod pm2 start ./server/app.js"
+    "server": "cross-env NODE_ENV=prod pm2 start ./server/app.js --name cube"
   },
   "keywords": [],
   "author": "",
